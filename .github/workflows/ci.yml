@@ -46,7 +46,7 @@ jobs :
 
       # 7. Trivy File System Scan
       - name: Trivy FS scan
-        uses: aquasecurity/trivy-action@@master
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scan-ref: '.'
