@@ -7,76 +7,76 @@ on :
 
 jobs :
   ci :
-  runs-on : ubuntu-latest
+    runs-on : ubuntu-latest
 
-  steps :
-    # 1 Checkout the source code 
-    - name: Checkout code 
-      uses: actions/checkout@v4
+    steps :
+      # 1 Checkout the source code 
+      - name: Checkout code 
+        uses: actions/checkout@v4
 
-    # 2. Setup Node.js (for linting tools)
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      # 2. Setup Node.js (for linting tools)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-    # 3. Install linting tools
-    - name: Install Linting Tools
-      run: |
-        npm install -g htmlhint stylelint stylelint-config-standard eslint
+      # 3. Install linting tools
+      - name: Install Linting Tools
+        run: |
+          npm install -g htmlhint stylelint stylelint-config-standard eslint
 
-    # 4 Linting  => for code quality
-    - name: Run Linting
-      run: |
-        echo "Linting step will go here"
-        htmlhint "**/*.html"
-        stylelint "**/*.css"
-        eslint "**/*.js" || true
+      # 4 Linting  => for code quality
+      - name: Run Linting
+        run: |
+          echo "Linting step will go here"
+          htmlhint "**/*.html"
+          stylelint "**/*.css"
+          eslint "**/*.js" || true
 
-    # 5. Initialize CodeQL (SAST)
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: javascript
+      # 5. Initialize CodeQL (SAST)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
 
-    # 6. Perform CodeQL Analysis
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      # 6. Perform CodeQL Analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
 
 
-    # 7. Trivy File System Scan
-    - name: Trivy FS scan
-      uses: aquasecurity/trivy-action@v0.20.0
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        severity: 'CRITICAL,HIGH'
-        exit-code: '1'
+      # 7. Trivy File System Scan
+      - name: Trivy FS scan
+        uses: aquasecurity/trivy-action@v0.20.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
 
-    # 8. Docker Build Image
-    - name: Build Docker Image
-      run: |
-        docker build -t devops-portfolio:ci .
+      # 8. Docker Build Image
+      - name: Build Docker Image
+        run: |
+          docker build -t devops-portfolio:ci .
 
-    # 9. Scan Docker Image (Container Security)
-    - name: Trivy Image Scan
-      uses: aquasecurity/trivy-action@v0.20.0
-      with:
-        image-ref: devops-portfolio:ci
-        severity: HIGH,CRITICAL
-        exit-code: 1
+      # 9. Scan Docker Image (Container Security)
+      - name: Trivy Image Scan
+        uses: aquasecurity/trivy-action@v0.20.0
+        with:
+          image-ref: devops-portfolio:ci
+          severity: HIGH,CRITICAL
+          exit-code: 1
 
-    # 10. DockerHub Login
-    - name: Login to DockerHub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # 10. DockerHub Login
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    # 11. Tag & Push Trusted Image
-    - name: Push Docker Image
-      run: |
-        docker tag devops-portfolio:ci ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
+      # 11. Tag & Push Trusted Image
+      - name: Push Docker Image
+        run: |
+          docker tag devops-portfolio:ci ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
 
   
