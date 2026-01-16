@@ -1,4 +1,4 @@
-name: CD - Deploy Docker Image to EC2
+name: CD - Deploy to EC2 (Docker)
 
 on:
   workflow_run:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to EC2 using Docker
+      - name: Deploy Docker Image on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -21,8 +21,8 @@ jobs:
           script: |
             docker stop portfolio || true
             docker rm portfolio || true
-            docker pull <dipti07>/devops-portfolio:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
             docker run -d \
               --name portfolio \
               -p 80:80 \
-              <dipti07>/devops-portfolio:latest
+              ${{ secrets.DOCKERHUB_USERNAME }}/devops-portfolio:latest
