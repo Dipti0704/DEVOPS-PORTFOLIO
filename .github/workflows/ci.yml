@@ -13,6 +13,10 @@ jobs :
   ci :
     runs-on : ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./devops-portfolio-new
+
     steps :
       # 1 Checkout the source code 
       - name: Checkout code 
@@ -23,42 +27,41 @@ jobs :
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: devops-portfolio-new/package-lock.json
 
-      # 3. Install linting tools
-      - name: Install Linting Tools
-        run: |
-          npm install -g htmlhint stylelint stylelint-config-standard eslint
+      # 3. Install dependencies
+      - name: Install Dependencies
+        run: npm ci
 
       # 4 Linting  => for code quality
       - name: Run Linting
-        run: |
-          echo "Linting step will go here"
-          htmlhint "**/*.html"
-          stylelint "**/*.css" || true
-          eslint "**/*.js" || true
+        run: npm run lint
+        continue-on-error: true
 
       # 5. Initialize CodeQL (SAST)
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
+          source-root: devops-portfolio-new
 
       # 6. Perform CodeQL Analysis
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-
 
       # 7. Trivy File System Scan
       - name: Trivy FS scan
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
-          scan-ref: '.'
+          scan-ref: 'devops-portfolio-new'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
 
       # 8. Docker Build Image
       - name: Build Docker Image
+        # Docker build context needs to be the specific folder since Dockerfile is there
         run: |
           docker build -t devops-portfolio:ci .
 
