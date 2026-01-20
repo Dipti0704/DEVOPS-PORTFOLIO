@@ -1,9 +1,9 @@
 # Design and Implementation of a Production-Grade DevSecOps CI/CD Pipeline for a Modern Web Application using GitHub Actions, Docker, and Kubernetes
 
-**Author:** Neel Dholiya  
+**Author:** Dipti Hatwar 
 **Program:** DevOps  
 **Project Type:** Advanced CI/CD & DevSecOps Pipeline  
-**Submission Date:** 21 Jan 2026  
+**Submission Date:** 20 Jan 2026  
 **Github Repository:** DEVOPS-PORTFOLIO
 
 ## 1. Introduction

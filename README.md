@@ -1,7 +1,7 @@
 # DevOps Portfolio
 
-![CI Pipeline](https://github.com/DiPti0704/DEVOPS-PORTFOLIO/actions/workflows/ci.yml/badge.svg)
-![CD Pipeline](https://github.com/DiPti0704/DEVOPS-PORTFOLIO/actions/workflows/cd.yml/badge.svg)
+![CI Pipeline](https://github.com/Dipti0704/DEVOPS-PORTFOLIO/actions/workflows/ci.yml/badge.svg)
+![CD Pipeline](https://github.com/Dipti0704/DEVOPS-PORTFOLIO/actions/workflows/cd.yml/badge.svg)
 
 A modern, high-performance **DevOps Portfolio** website built with **React**, **Vite**, and **Tailwind CSS**, designed to showcase DevOps projects, skills, and certifications.
 
