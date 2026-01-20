@@ -9,7 +9,7 @@ This project is not just a static site; it is a **living demonstration of DevSec
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 ### Frontend & Application
 - **React (Vite)**: Fast, modern frontend framework.
@@ -25,7 +25,7 @@ This project is not just a static site; it is a **living demonstration of DevSec
 
 ---
 
-## 🔄 CI/CD Pipeline Architecture
+##  CI/CD Pipeline Architecture
 
 The pipeline follows a **Shift-Left Security** approach, ensuring every commit is verified before deployment.
 
@@ -51,7 +51,7 @@ Triggered automatically after a successful CI run.
 
 ---
 
-## 🛠️ Getting Started Locally
+##  Getting Started Locally
 
 ### Prerequisites
 - Node.js (v18+)
@@ -92,7 +92,7 @@ Access the app at `http://localhost:8080`.
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 DEVOPS-PORTFOLIO/
@@ -109,7 +109,7 @@ DEVOPS-PORTFOLIO/
 
 ---
 
-## 🛡️ Security
+##  Security
 
 This project implements **DevSecOps** best practices:
 - **No Root Containers**: Nginx runs as a non-root user (where applicable).
@@ -119,8 +119,6 @@ This project implements **DevSecOps** best practices:
 
 ---
 
-## 👤 Author
+##  Author
 
-**Neel Dholiya**  
-DevOps Engineer | React Developer  
-[LinkedIn](#) | [Portfolio](#)
+**Dipti Hatwar**  
