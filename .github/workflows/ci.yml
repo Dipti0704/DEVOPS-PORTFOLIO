@@ -39,6 +39,9 @@ jobs :
         run: npm run lint
         continue-on-error: true
 
+      - name: Run Unit Tests
+        run: npm test
+
       # 5. Initialize CodeQL (SAST)
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
